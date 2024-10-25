@@ -1,0 +1,3 @@
+crawlers:
+  - class: MTeam
+  - class: CHDBits
