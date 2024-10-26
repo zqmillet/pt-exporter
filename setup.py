@@ -10,7 +10,7 @@ with open('pt_exporter/requirements.txt', 'r', encoding='utf8') as file:
     install_requires = list(map(lambda x: x.strip(), file.readlines()))
 
 setup(
-    name='jmm',
+    name='pt-exporter',
     version=VERSION,
     author='kinopico',
     author_email='zqmillet@qq.com',
