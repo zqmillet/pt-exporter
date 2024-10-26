@@ -74,5 +74,8 @@ scheduler.start()
 
 update_data()
 
-if __name__ == '__main__':
+def main():
     run(application, host=arguments.host, port=arguments.port)
+
+if __name__ == '__main__':
+    main()
