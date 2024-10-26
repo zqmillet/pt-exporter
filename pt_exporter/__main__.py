@@ -1,5 +1,5 @@
 from typing import Dict
-from typing import List
+from argparse import ArgumentParser
 
 from fastapi import FastAPI
 from fastapi import Response
@@ -7,23 +7,51 @@ from uvicorn import run
 from prometheus_client import generate_latest
 from prometheus_client import CollectorRegistry
 from prometheus_client import Gauge
-from apscheduler.schedulers.background import BackgroundScheduler
-from crawlers import MTeam
-from crawlers import Crawler
+from apscheduler.schedulers.background import BackgroundScheduler # type: ignore
 from loguru import logger
+
+from .crawlers import Crawlers
+
+parser = ArgumentParser()
+parser.add_argument(
+    '-p', '--port',
+    type=int,
+    default=8000,
+    help='port of the server'
+)
+
+parser.add_argument(
+    '--host',
+    type=str,
+    default='0.0.0.0',
+    help='ip address for listening'
+)
+
+parser.add_argument(
+    '-c', '--configuration-file-path',
+    type=str,
+    required=True,
+    help='path of the configuration file'
+)
+
+arguments = parser.parse_args()
 
 application = FastAPI()
 
 registry = CollectorRegistry()
-gauge = Gauge('upload_bytes', 'upload bytes of website', ['website'], registry=registry)
 
-uploads: Dict[str, int] = {}
+upload_bytes_gauge = Gauge('upload_bytes', 'upload bytes of website', ['website'], registry=registry)
+download_bytes_gauge = Gauge('download_bytes', 'download bytes of website', ['website'], registry=registry)
+bonus_gauge = Gauge('bonus', 'download bytes of website', ['website'], registry=registry)
+
+upload_bytes_group: Dict[str, int] = {}
+download_bytes_group: Dict[str, int] = {}
+bonus_group: Dict[str, float] = {}
+
+crawlers = Crawlers(arguments.configuration_file_path, logger) # type: ignore
 
 @application.get('/metrics')
 def metrics():
-    for website, upload_bytes in uploads.items():
-        gauge.labels(website=website).set(upload_bytes)
-
     return Response(generate_latest(registry), media_type='text/plain')
 
 def get_headers(file_path: str) -> Dict[str, str]:
@@ -34,24 +62,17 @@ def get_headers(file_path: str) -> Dict[str, str]:
             headers[key] = value.strip()
     return headers
 
-mteam = MTeam(get_headers('./headers/mteam.header'))
-crawlers: List[Crawler] = [mteam]
-
 def update_data():
-    for crawler in crawlers:
-        try:
-            user = crawler.get_user()
-        except Exception as exception:
-            logger.exception(exception)
-        else:
-            uploads[crawler.__class__.__name__] = user.upload_bytes
-            logger.info(f'update {crawler.__class__.__name__} data')
+    for website, user in crawlers.get_users().items():
+        upload_bytes_gauge.labels(website).set(user.upload_bytes)
+        download_bytes_gauge.labels(website).set(user.download_bytes)
+        bonus_gauge.labels(website).set(user.bonus)
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(update_data, 'interval', minutes=5)
+scheduler.add_job(update_data, 'interval', minutes=30)
 scheduler.start()
 
 update_data()
 
 if __name__ == '__main__':
-    run(application, host='0.0.0.0', port=1926)
+    run(application, host=arguments.host, port=arguments.port)

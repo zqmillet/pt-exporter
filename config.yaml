@@ -1,3 +1,5 @@
 crawlers:
   - class: MTeam
+    header-file-path: ./headers/mteam.header
   - class: CHDBits
+    header-file-path: ./headers/chdbits.header
