@@ -5,3 +5,4 @@ prometheus_client==0.21.0
 pydantic
 PyYAML==6.0.2
 uvicorn==0.32.0
+pt-crawler
