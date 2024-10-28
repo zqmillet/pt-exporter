@@ -8,9 +8,9 @@ from pydantic import Field
 
 class CrawlerConfiguration(BaseModel):
     header_file_path: str = Field(alias='header-file-path')
-    clazz: str = Field(alias='class')
+    clazz: str = Field(alias='website')
     proxy: Optional[str] = Field(default=None)
-    base_url: str = Field(default='')
+    base_url: str = Field(default='', alias='base-url')
     timeout: Optional[float] = Field(default=None)
 
     @property

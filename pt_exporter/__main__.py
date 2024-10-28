@@ -11,6 +11,7 @@ from apscheduler.schedulers.background import BackgroundScheduler # type: ignore
 from loguru import logger
 
 from .crawlers import Crawlers
+from . import VERSION
 
 parser = ArgumentParser()
 parser.add_argument(
@@ -32,6 +33,13 @@ parser.add_argument(
     type=str,
     required=True,
     help='path of the configuration file'
+)
+
+parser.add_argument(
+    '-v', '--version',
+    action='version',
+    help='show version',
+    version=VERSION
 )
 
 arguments = parser.parse_args()
@@ -75,6 +83,9 @@ scheduler.start()
 update_data()
 
 def main():
+    if arguments.version:
+        print(VERSION)
+
     run(application, host=arguments.host, port=arguments.port)
 
 if __name__ == '__main__':
