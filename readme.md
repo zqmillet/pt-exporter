@@ -80,18 +80,32 @@ user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 ``` bash
 $ pt-exporter -c /path/of/config.yaml -p 8000
+2024-10-28 20:54:48.687 | INFO     | pt_exporter.crawlers:get_users:40 - get user from MTeam successfully
+2024-10-28 20:54:49.415 | INFO     | pt_exporter.crawlers:get_users:40 - get user from CHDBits successfully
+INFO:     Started server process [81951]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 ```
 
-上述命令加载配置文件 `/path/of/config.yaml` 并启动服务, 监听 8000 端口.
+上述命令加载配置文件 `/path/of/config.yaml` 并启动服务, 监听 8000 端口. 如果没有异常日志, 则表示服务正常.
 
-您可以使用 `curl` 命令来判断 pt-exporter 是否正常运行, 如果出现类似以下响应数据, 则表示服务正常.
+您也可以使用 `curl` 命令来判断 pt-exporter 是否正常运行, 如果出现类似以下响应数据, 则表示服务正常.
 
 ``` bash
-$ curl http://192.168.3.233:2000/metrics
+$ curl http://localhost:8000/metrics
 # HELP upload_bytes upload bytes of website
 # TYPE upload_bytes gauge
 upload_bytes{website="MTeam"} 4.463126014388356e+015
 upload_bytes{website="CHDBits"} 3.601753801989554e+015
+# HELP download_bytes download bytes of website
+# TYPE download_bytes gauge
+download_bytes{website="MTeam"} 7.4603744149538e+013
+download_bytes{website="CHDBits"} 2.546468929929e+012
+# HELP bonus download bytes of website
+# TYPE bonus gauge
+bonus{website="MTeam"} 362265.7
+bonus{website="CHDBits"} 266830.5
 ```
 
 ## 配置 Prometheus
@@ -113,4 +127,9 @@ scrape_configs:
 
 ## Grafana 配置
 
-TODO
+待补充
+
+# TODO
+
+- 支持时魔采集.
+- 支持保种数量/体积采集.

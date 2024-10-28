@@ -83,9 +83,6 @@ scheduler.start()
 update_data()
 
 def main():
-    if arguments.version:
-        print(VERSION)
-
     run(application, host=arguments.host, port=arguments.port)
 
 if __name__ == '__main__':
