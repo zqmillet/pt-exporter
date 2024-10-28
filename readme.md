@@ -108,3 +108,9 @@ scrape_configs:
 
 - `<host>` 是你启动 pt-exporter 的服务器地址.
 - `<port>` 是你启动 pt-exporter 的服务端口.
+
+重启 Prometheus 服务即可生效.
+
+## Grafana 配置
+
+TODO
