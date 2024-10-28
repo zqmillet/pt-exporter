@@ -51,6 +51,7 @@ crawlers:
 
 ``` text
 cookie: c_secure_uid=MTMxMTc4;
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
 ```
 
 不同网站所需的 Key 是不同的, 下表为每个 PT 站所必需字段.
@@ -69,7 +70,7 @@ cookie: c_secure_uid=MTMxMTc4;
 | 幼儿园 | `crawlers.U2`        | `cookie`               |
 | 柠檬   | `crawlers.LemonHD`   | `cookie`, `user-agent` |
 
-其中 `cookie` 和 `authorization` 可以在浏览器中获取, 其中获取方式详见[此链接](https://blog.csdn.net/qq_39915672/article/details/104136634), 拉面的 `apitoken` 需要在网站自行自行生成, 有效期为一个月.
+其中 `cookie` 和 `authorization` 可以在浏览器中获取, 其中获取方式详见[此链接](https://blog.csdn.net/qq_39915672/article/details/104136634), 拉面的 `apitoken` 需要在网站自行生成, 有效期为一个月.
 
 在配置文件中, 只有 `website` 和 `header-file-path` 这两个字段是必需的, 其他参数均为可选.
 
