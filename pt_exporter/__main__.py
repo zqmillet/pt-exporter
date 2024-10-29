@@ -43,6 +43,14 @@ parser.add_argument(
 )
 
 parser.add_argument(
+    '--uvicorn-log-level',
+    type=str,
+    choices=['critical', 'error', 'warning', 'info', 'debug'],
+    default='warning',
+    help='log level of uvicorn'
+)
+
+parser.add_argument(
     '-v', '--version',
     action='version',
     help='show version',
@@ -84,13 +92,12 @@ def update_data():
         bonus_gauge.labels(website).set(user.bonus)
 
 def main():
-
     scheduler = BackgroundScheduler()
     scheduler.add_job(update_data, 'interval', minutes=max(arguments.interval, 15))
     scheduler.start()
 
     update_data()
-    run(application, host=arguments.host, port=arguments.port)
+    run(application, host=arguments.host, port=arguments.port, log_level=arguments.uvicorn_log_level)
 
 if __name__ == '__main__':
     main()
