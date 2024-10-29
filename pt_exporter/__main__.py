@@ -36,6 +36,13 @@ parser.add_argument(
 )
 
 parser.add_argument(
+    '-i', '--interval',
+    type=int,
+    default=30,
+    help='update interval'
+)
+
+parser.add_argument(
     '-v', '--version',
     action='version',
     help='show version',
@@ -76,13 +83,13 @@ def update_data():
         download_bytes_gauge.labels(website).set(user.download_bytes)
         bonus_gauge.labels(website).set(user.bonus)
 
-scheduler = BackgroundScheduler()
-scheduler.add_job(update_data, 'interval', minutes=30)
-scheduler.start()
-
-update_data()
-
 def main():
+
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(update_data, 'interval', minutes=max(arguments.interval, 15))
+    scheduler.start()
+
+    update_data()
     run(application, host=arguments.host, port=arguments.port)
 
 if __name__ == '__main__':

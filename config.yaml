@@ -3,3 +3,5 @@ crawlers:
     header-file-path: ./headers/mteam.header
   - website: CHDBits
     header-file-path: ./headers/chdbits.header
+  - website: PTerClub
+    header-file-path: ./headers/pterclub.header
