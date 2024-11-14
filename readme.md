@@ -29,7 +29,7 @@ $ pt-exporter -v
 1.0.5
 ```
 
-## Docker 安装
+### Docker 安装
 
 ``` bash
 docker pull pt-exporter
