@@ -1,0 +1,8 @@
+crawlers:
+  - website: CHDBits
+    headers:
+      cookie: c_secure_ssl=eWVhaA%3D%3D; cf_clearance=GrjIdop.CfZ6sce5F3VTfZvW.osoekbLMgI6058FQUo-1728355020-1.2.1.1-s49mb6VErqIEeTS99PIzjCohXb4XWOlOd7abPloYn8rIs.vut4UTUjLR3D3fZZLob5xMO9TMaCh.nSWAtH97eyYfIxpVubgFIRYsNLVdzz.33w.NxZ_SuPCNwKyph1cVh.QBBC_Z7nZ8AukKkpB_g4_HY0v8Rxhr00h6hKn4k8liO6qXS7CrkcWjk_5gmQwe_B8zX4WR7TA7L09PBaYiQ.mG9YbGf2BD0afWNk_ZCSWVRABu1gaJ7XlwM96FgZC_23wADUDSrkLjOM6wVTe_CLmlqfVpIf45jrtuBPbrtiakaHig5Frstjm50B6KE9pI0SKOs8ZrcmURrxPZygKs8qjoT3NIu.keHdSXJYOlJJjD9iEupyCQH0MxzG7YeDiFSkQAX52tTV.HmdOvbD9RGVZTONClZFit32ms3ikcXiAWGandKmRf5KtrS3XaVcuT; c_secure_uid=MTMxMTc3; c_secure_pass=8d44b70c1829101cc8455b0c79ff95f9; c_secure_tracker_ssl=eWVhaA%3D%3D; c_secure_login=bm9wZQ%3D%3D
+  - website: PTerClub
+    headers:
+      cookie: c_secure_uid=MjIzNDg%3D; c_secure_pass=94d511ec224626e86ba055ec509b12ad; c_secure_ssl=eWVhaA%3D%3D; c_secure_tracker_ssl=eWVhaA%3D%3D; c_secure_login=bm9wZQ%3D%3D; c_lang_folder=chs; cf_clearance=3ALqMpp1gCVoOquXQbaTA_3FVG_0QlYSqkST56k0.rc-1727160713-1.2.1.1-GQYd.mu013O_qVQ5nv76_5fr6_1rnji3sD37CUN4INUvHo46cb37jnLumnysFfeIEowWehxLRglBowHgHumIFkDIQLLzdb6yHxGQa547oFCSsrhzTx5aSlbHXODNMiAEOhYmEJ6N8_K9Ioh4yagYk0JVLMhFHztimrUP8RpREEg2clNSCkUltR4H5dT9LJiAYsVAErmulXXxcjFaChzAMgp.wvFhEUuPb.pN2FRCcxXt3PHvoYVO_Y3H_BHHn1B7_NXCKDhFLtMcUX0teMo0ZU6bOwJawbO.QTcUUOZk.O9howWtUvzbpoc.NiULBw00uP8EURcqk3qWnMjkw63W5vs_c5_mq_eN6m2vTTpDj136QrI7r6.nEMhK5HW3A1pAU_aj8Su9hMvTf0ei.kzqUHq_uRMeT6gywnlJJHaO.m94hmaGMvCiwtKOuN8NZpar; PHPSESSID=ho9nqpv9b4pimq75ncnp7ao6r9
+    proxy: http://192.168.3.233:1926

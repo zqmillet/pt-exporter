@@ -1,7 +1,0 @@
-crawlers:
-  - website: MTeam
-    header-file-path: /config/mteam.header
-  - website: CHDBits
-    header-file-path: /config/chdbits.header
-  - website: PTerClub
-    header-file-path: /config/pterclub.header

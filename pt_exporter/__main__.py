@@ -1,5 +1,6 @@
 from typing import Dict
 from argparse import ArgumentParser
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi import Response
@@ -32,7 +33,7 @@ parser.add_argument(
     '-c', '--configuration-file-path',
     type=str,
     help='path of the configuration file',
-    default='~/.pt-exporter.yaml'
+    default=Path.home() / '.pt-exporter.yaml'
 )
 
 parser.add_argument(
