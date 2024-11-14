@@ -91,6 +91,8 @@ user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 ## 启动服务
 
+### PyPI 安装
+
 如果您是使用 PyPI 安装使用如下命令启动服务.
 
 ``` bash
@@ -103,15 +105,30 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 ```
 
-上述命令加载配置文件 `/path/of/config.yaml` 并启动服务, 监听 8000 端口. 如果没有异常日志, 则表示服务正常.
+上述命令会加载配置文件 `/path/of/config.yaml` 并启动服务, 监听 8000 端口. 如果没有异常日志, 则表示服务正常.
 
-如果您是使用 Docker 安装则稍微复杂. 安装使用如下命令启动服务.
+### Docker 安装
+
+如果您是使用 Docker 安装, 请将配置文件重命名为 `.pt-exporter.yaml`, `.pt-exporter` 所在的目录记为 <directory-of-config>, 使用如下命令启动服务.
 
 ``` bash
-$ docker run -it -p 8000:8000 -v /Users/kinopico/Workspace/pt-exporter/config:/config pt-exporter pt-exporter -c /config/config.yaml
+$ docker run -itd -p 8000:8000 -v <directory-of-config>:/root pt-exporter pt-exporter
+2890250d702e94c785d62a9c44dbaca608bf830f79d9ce0988992f54f581850a
+
+$ docker logs 2890250d702e94c785d62a9c44dbaca608bf830f79d9ce0988992f54f581850a
+2024-11-14 14:04:14.821 | INFO     | pt_exporter.crawlers:get_users:40 - get user from CHDBits successfully
+2024-11-14 14:04:18.070 | INFO     | pt_exporter.crawlers:get_users:40 - get user from PTerClub successfully
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 ```
 
-您也可以使用 `curl` 命令来判断 pt-exporter 是否正常运行, 如果出现类似以下响应数据, 则表示服务正常.
+上述命令会加载配置文件并启动服务, 通过 `docker logs` 查看日志, 如果没有异常日志, 则表示服务正常.
+
+### 验证服务
+
+可以使用 `curl` 命令来判断 pt-exporter 是否正常运行, 如果出现类似以下响应数据, 则表示服务正常.
 
 ``` bash
 $ curl http://localhost:8000/metrics
