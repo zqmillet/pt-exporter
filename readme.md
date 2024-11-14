@@ -19,7 +19,7 @@ $ pip3 install pt-exporter
 或者
 
 ``` bash
-$ python3 -m pip install pt_exporter
+$ python3 -m pip install pt-exporter
 ```
 
 安装后, 系统中会多出一个 `pt-exporter` 的命令, 你可以在控制台中使用 `pt-exporter -v` 命令显示版本号, 如果能正常打印版本号, 则表示您已经成功安装 pt-exporter.
