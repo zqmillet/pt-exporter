@@ -51,29 +51,24 @@ $ docker run -it pt-exporter:1.0 pt-exporter -v
 ``` yaml
 crawlers:
   - website: MTeam
-    header-file-path: /path/of/mteam.header
+    headers:
+      authorization: <mteam-authorization>
     timeout: 5
   - website: CHDBits
-    header-file-path: /path/of/chdbits.header
+    headers:
+      cookie: <chdbits-cookie>
     proxy: http://<host>:<port>
     base-url: https://abc.chdbits.xyz
 ```
 
 其中 ``crawlers`` 字段是一个列表, 其中包含两个爬虫配置:
 
-- 第一个爬虫爬取的网站是 MTeam, 请求头文件的地址为 `/path/of/mteam.header`, 超时时间为 5 秒.
-- 第二个爬虫爬取的网站是 CHDBits, 请求头文件的地址为 `/path/of/chdbits.header`, 使用代理 `http://<host>:<port>` 进行访问此站, 并重置网站域名为 `https://abc.chdbits.xyz`.
+- 第一个爬虫爬取的网站是 MTeam, 请求头包含 `authorization` 字段, 超时时间为 5 秒.
+- 第二个爬虫爬取的网站是 CHDBits, 请求头包含 `cookie` 字段, 使用代理 `http://<host>:<port>` 进行访问此站, 并重置网站域名为 `https://abc.chdbits.xyz`.
 
 因为 pt-exporter 是基于 pt-crawler 开发的, 因此 pt-exporter 暂时只支持 pt-crawler 支持的 PT 站, 如果希望支持更多的 PT 站点, 请给 [pt-crawler](https://github.com/zqmillet/pt-crawler) 提 issue.
 
-配置文件中的请求头文件为文本文件, 扩展名随意, 建议使用 `.header`, 不必强求. `.header` 文件每一行都是 Key-Value 格式, 以下就是一个 `.header` 文件的例子.
-
-``` text
-cookie: c_secure_uid=MTMxMTc4;
-user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0
-```
-
-不同网站所需的 Key 是不同的, 下表为每个 PT 站所必需字段.
+不同网站所需请求头中的字段是不同的, 下表为每个 PT 站所必需字段.
 
 | 别称   | 类                   | `.header` 中必需字段   |
 |--------|----------------------|------------------------|
@@ -91,7 +86,7 @@ user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 其中 `cookie` 和 `authorization` 可以在浏览器中获取, 其中获取方式详见[此链接](https://blog.csdn.net/qq_39915672/article/details/104136634), 拉面的 `apitoken` 需要在网站自行生成, 有效期为一个月.
 
-在配置文件中, 只有 `website` 和 `header-file-path` 这两个字段是必需的, 其他参数均为可选.
+在配置文件中, 只有 `website` 和 `headers` 这两个字段是必需的, 其他参数均为可选.
 
 ## 启动服务
 
