@@ -31,8 +31,8 @@ parser.add_argument(
 parser.add_argument(
     '-c', '--configuration-file-path',
     type=str,
-    required=True,
-    help='path of the configuration file'
+    help='path of the configuration file',
+    default='~/.pt-exporter.yaml'
 )
 
 parser.add_argument(
@@ -46,7 +46,7 @@ parser.add_argument(
     '--uvicorn-log-level',
     type=str,
     choices=['critical', 'error', 'warning', 'info', 'debug'],
-    default='warning',
+    default='info',
     help='log level of uvicorn'
 )
 
@@ -76,14 +76,6 @@ crawlers = Crawlers(arguments.configuration_file_path, logger) # type: ignore
 @application.get('/metrics')
 def metrics():
     return Response(generate_latest(registry), media_type='text/plain')
-
-def get_headers(file_path: str) -> Dict[str, str]:
-    headers = {}
-    with open(file_path, 'r', encoding='utf8') as file:
-        for line in file:
-            key, value = line.strip().split(': ')
-            headers[key] = value.strip()
-    return headers
 
 def update_data():
     for website, user in crawlers.get_users().items():

@@ -2,9 +2,11 @@
 
 pt-exporter 是一个基于 [pt-crawler](https://github.com/zqmillet/pt-crawler) 开发的 Private Tracker 站点的 Prometheus 监控代理, 主要用于收集你自己 PT 站点的个人信息, 包括上传, 下载, 魔力值等信息. 免去了自己手动同步 PTPP 的烦恼.
 
-## 安装部署
+## 安装
 
-pt-exporter 目前只支持 pip 安装, 以后会支持 docker 安装部署.
+pt-exporter 提供了两种安装方式, 一种是 PyPI 安装, 一种是 Docker 安装. 如果你是 Windows 操作系统或者有 Python 环境, 推荐使用 PyPI 安装方式; 如果你有 Docker 环境推荐使用 Docker 安装.
+
+### PyPI 安装
 
 ``` bash
 $ pip3 install pt-exporter
@@ -20,7 +22,20 @@ $ python3 -m pip install pt_exporter
 
 ``` bash
 $ pt-exporter -v
-1.0.2
+1.0.5
+```
+
+## Docker 安装
+
+``` bash
+docker pull pt-exporter
+```
+
+安装后可以通过 `docker run -it pt-exporter:1.0 pt-exporter -v` 显示版本号, 如果能正常打印版本号, 则表示您已经成功安装 pt-exporter.
+
+``` bash
+$ docker run -it pt-exporter:1.0 pt-exporter -v
+1.0.5
 ```
 
 ## 配置文件
@@ -76,7 +91,7 @@ user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 ## 启动服务
 
-使用如下命令启动服务.
+如果您是使用 PyPI 安装使用如下命令启动服务.
 
 ``` bash
 $ pt-exporter -c /path/of/config.yaml -p 8000
@@ -89,6 +104,12 @@ INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 ```
 
 上述命令加载配置文件 `/path/of/config.yaml` 并启动服务, 监听 8000 端口. 如果没有异常日志, 则表示服务正常.
+
+如果您是使用 Docker 安装则稍微复杂. 安装使用如下命令启动服务.
+
+``` bash
+$ docker run -it -p 8000:8000 -v /Users/kinopico/Workspace/pt-exporter/config:/config pt-exporter pt-exporter -c /config/config.yaml
+```
 
 您也可以使用 `curl` 命令来判断 pt-exporter 是否正常运行, 如果出现类似以下响应数据, 则表示服务正常.
 
