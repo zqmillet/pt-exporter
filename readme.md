@@ -2,6 +2,10 @@
 
 pt-exporter 是一个基于 [pt-crawler](https://github.com/zqmillet/pt-crawler) 开发的 Private Tracker 站点的 Prometheus 监控代理, 主要用于收集你自己 PT 站点的个人信息, 包括上传, 下载, 魔力值等信息. 免去了自己手动同步 PTPP 的烦恼.
 
+配合 Grafana 可以实现很好的 PT 数据可视化.
+
+![screenshot](./statics/screenshot.png "Grafana 截图")
+
 ## 安装
 
 pt-exporter 提供了两种安装方式, 一种是 PyPI 安装, 一种是 Docker 安装. 如果你是 Windows 操作系统或者有 Python 环境, 推荐使用 PyPI 安装方式; 如果你有 Docker 环境推荐使用 Docker 安装.
