@@ -32,7 +32,7 @@ $ pt-exporter -v
 ### Docker 安装
 
 ``` bash
-docker pull pt-exporter
+docker pull zqmillet/pt-exporter
 ```
 
 安装后可以通过 `docker run -it pt-exporter:latest pt-exporter -v` 显示版本号, 如果能正常打印版本号, 则表示您已经成功安装 pt-exporter.
