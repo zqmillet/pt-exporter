@@ -38,7 +38,7 @@ docker pull zqmillet/pt-exporter
 安装后可以通过 `docker run -it pt-exporter:latest pt-exporter -v` 显示版本号, 如果能正常打印版本号, 则表示您已经成功安装 pt-exporter.
 
 ``` bash
-$ docker run -it pt-exporter:1.0 pt-exporter -v
+$ docker run -it pt-exporter:latest pt-exporter -v
 1.0.5
 ```
 
@@ -108,7 +108,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 
 ### Docker 安装
 
-如果您是使用 Docker 安装, 请将配置文件重命名为 `.pt-exporter.yaml`, `.pt-exporter` 所在的目录记为 <directory-of-config>, 使用如下命令启动服务.
+如果您是使用 Docker 安装, 请将配置文件重命名为 `.pt-exporter.yaml`, `.pt-exporter` 所在的目录记为 `<directory-of-config>`, 使用如下命令启动服务.
 
 ``` bash
 $ docker run -itd -p 8000:8000 -v <directory-of-config>:/root pt-exporter:latest pt-exporter
